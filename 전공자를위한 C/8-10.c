@@ -1,21 +1,24 @@
 #include<stdio.h>
-int power(int a, int b);
-
+void move(int n, char x, char y, char z);
 int main()
 {
-	int base, multiplier;
-	printf("Enter base and muliplier.\n");
-	scanf("%d %d", &base, &multiplier);
-	printf("%d to the power of %d is %d", base, multiplier, power(base, multiplier));
-
+	int num; //원반의 개수
+	int x, y, z; //축의 이름
+	printf("Enter the number of disks.\n");
+	scanf("%d", &num);
+	move(num, x, y, z);
 	return 0;
 }
 
-int power(int a, int b)
+void move(int n, char x, char y, char z) //x:출발지 y:도착지 z:경유지
 {
-	if (b == 1)
-		return a;
-	else 
-		return a * power(a, b - 1);
-	
+	if (n == 1) {
+		printf("move a disk from %c to %c", x, y); //원반을 x에서 y로 옯긴다.(z를 매개로)
+		return;
+	}
+	else {
+		move(n-1, 'X', 'Z', 'Y');
+		move(1, 'X', 'Y', 'Z');
+		move(n - 1, 'Z', 'Y', 'X');
+	}
 }
